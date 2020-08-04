@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    height: 50vh;
+    overflow-x: scroll;
+    margin: 10vh 1vw;
+    scroll-snap-type: x mandatory;
+}
+.item{
+    scroll-snap-align: start;
+    width: 30%;
+    height: 100%;
+    flex-shrink: 0;
+    margin: 0 2vw;
+}
+#one {
+    background-color: blue;
+}
+#two {
+    background-color: orange;
+}
+#three {
+    background-color: red;
+}
+#four {
+    background-color: gray;
+}
+#five {
+    background-color: green;
+}
+
+@media screen and (max-width: 1020px) {
+    .item {
+        width: 50%;
+    }
+}
+@media screen and (min-width: 1500px) {
+    .item {
+        width: 21%;
+    }
+}
