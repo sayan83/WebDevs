@@ -21,16 +21,58 @@
     -webkit-transform: perspective(1000px);
 }
 .card {
+    background: url("./cardImg.jpg");
+    background-position: center;
+    background-size: cover;
     height: 100%;
     width: 100%;
+    border-radius: 10px;
+    padding-bottom: 10%;
     text-align: center;
     box-shadow: 3px 3px 8px #1b1b1b;
-    transition: transform 200ms;
+    transition: transform,scale 200ms;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform: perspective(1000px);
+    -webkit-transform: perspective(1000px);
 }
-
+.desc {
+    width: 90%;
+    background-color: whitesmoke;
+    margin: 0 auto;
+    padding: 15px;
+    text-align: justify;
+    box-shadow: 4px 4px 10px gray;
+    transform: translateZ(70px);
+    clip-path: circle(0px at center);
+}
+.descAnimate {
+    animation: descEntry 300ms ease-in-out 0s 1 normal both;
+}
+.descAnimateExit {
+    animation: descExit 300ms ease-in-out 0s 1 normal both;
+}
 #one {
-    background-color: aqua;
+    background-color: rgb(48, 48, 48);
+    display: flex;
+    flex-direction: column;
 }
-#two {
-    background-color: blueviolet;
+@keyframes descEntry {
+    0%{
+        clip-path: circle(0% at center);
+    }
+    100%{
+        clip-path: circle(100% at center);
+    }
+}
+@keyframes descExit {
+    0%{
+        clip-path: circle(100% at center);
+    }
+    100%{
+        clip-path: circle(0% at center);
+    }
 }
