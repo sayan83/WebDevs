@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas height="500" width="1000" id="canvas"></canvas>
+    <script src="../three.js"></script>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas })
+        console.log(renderer)
+        
+        const fav = 75
+        const aspect = 2
+        const near = 0.1
+        const far = 5.0
+        const camera = new THREE.PerspectiveCamera(fav, aspect, near, far)
+        camera.position.z = 2;
+
+        const scene = new THREE.Scene();
+
+        const height = 1
+        const width = 1
+        const depth = 1 
+        const geometry = new THREE.BoxGeometry(width, height, depth)
+
+        const material = new THREE.MeshPhongMaterial({color: 0x44aa88})
+
+        const cube = new THREE.Mesh(geometry, material)
+        console.log(cube)
+
+        scene.add(cube)
+
+        // renderer.render(scene, camera)
+
+        const color = 0xFFFFFF
+        const intensity = 1
+        const light = new THREE.DirectionalLight(color, intensity)
+        light.position.set(-1,2,4)
+        scene.add(light)
+
+        function render(time) {
+            time *= 0.001
+
+            cube.rotation.x = time;
+            cube.rotation.y = time;
+
+            renderer.render(scene, camera)
+
+            requestAnimationFrame(render)
+        }
+        render()
+    </script>
+</body>
+</html>
