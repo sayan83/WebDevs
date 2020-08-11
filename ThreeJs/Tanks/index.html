@@ -7,7 +7,34 @@
     <title>Tanks</title>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    <div class="flex-container">
+        <div class="sidebar">
+            <div class="selectCamera">
+                <p>SELECT CAMERA</p> <hr>
+                <input type="radio" id="mainCam" name="camSel" checked>
+                <label for="mainCam">Main Camera</label> <br>
+                <input type="radio" id="tankCam" name="camSel">
+                <label for="mainCam">Tank Camera</label> <br>
+                <input type="radio" id="turretCam" name="camSel">
+                <label for="mainCam">Turret Camera</label> <br>
+                <input type="radio" id="targetCam" name="camSel">
+                <label for="mainCam">Target Camera</label> <br>
+            </div>
+            <br> <br>
+            <div class="speedSelector">
+                <p>SPEED CONTROLS</p> <hr>
+                <label for="tankSpeed">Adjust Tank Speed</label>
+                <input type="range" min="1" max="100" value="5" class="slider" name="tankSpeed"> <br>
+                <label for="targetOrbitSpeed">Adjust Target Orbit Speed</label> 
+                <input type="range" min="1" max="100" value="1" class="slider" name="targetOrbitSpeed"> <br>
+                <label for="targetVerticalSpeed">Adjust Target Vertical Speed</label>
+                <input type="range" min="1" max="100" value="11" class="slider" name="targetVerticalSpeed">
+            </div>
+        </div>
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
     <script src="../three.js"></script>
     <script src="./main.js"></script>
 </body>

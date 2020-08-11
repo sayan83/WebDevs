@@ -182,10 +182,10 @@ function main () {
 
     // CREATE A LIST OF ALL CAMERAS
     const cameras = [
-      { cam: camera, name: 'Main Camera'},
-      { cam: targetCamera, name: 'Target Camera'},
-      { cam: tankCamera, name: 'Tank Camera'},
-      { cam: turretCamera, name: 'Turret Camera'},
+      { cam: camera, name: 'mainCam'},
+      { cam: targetCamera, name: 'targetCam'},
+      { cam: tankCamera, name: 'tankCam'},
+      { cam: turretCamera, name: 'turretCam'},
     ];
 
     // FINAL RENDER FUNCTION FOR ALL ANIMATIONS
@@ -200,17 +200,20 @@ function main () {
         });
       }
 
+      // GET THE SPEED OF OBJECTS
+      let {targetYSpeed, targetOrbitSpeed, tankSpeed} = speedControls()
+
       // MOVING THE TARGET OBJECT
-      const targetYSpeed = 2;
-      const targetYMovementSpace = 4;
-      const targetOrbitSpeed = 0.5;
+      // let targetYSpeed = 2;
+      let targetYMovementSpace = 4;
+      // let targetOrbitSpeed = 20;
       targetOrbit.rotation.y = time * targetOrbitSpeed;
       targetBob.position.y = Math.sin(time * targetYSpeed) * targetYMovementSpace;
       targetMesh.rotation.x = time * 7;
       targetMesh.rotation.y = time * 13;
 
       // MOVING THE TANK
-      const tankSpeed = 0.05;
+      // let tankSpeed = 0.05;
       const tankTime = time * tankSpeed;
       curve.getPointAt(tankTime%1, tankPosition);
       curve.getPointAt((tankTime+0.01)%1, tankTarget);
@@ -231,10 +234,16 @@ function main () {
 
       // MAKE TARGET CAMERA LOOK AT TANK
       tank.getWorldPosition(targetPosition);
-      targetCameraPivot.lookAt(targetPosition)
+      targetCameraPivot.lookAt(targetPosition);
+
+      // GET SPEED CONTROLS
+      
+
+      // CHECK CAMERA SELECTED
+      const cam = checkCam(cameras);
 
       // RENDER FINAL IMAGE TO CANVAS
-      renderer.render(scene,camera)
+      renderer.render(scene,cam);
 
       requestAnimationFrame(render);
     }
@@ -251,5 +260,21 @@ function resizeRendererToDisplaySize(renderer,canvas) {
   return needResize;
 }
 
+function speedControls() {
+  const tankSpeed = document.getElementsByName('tankSpeed')[0].value/100;
+  const targetOrbitSpeed = document.getElementsByName('targetOrbitSpeed')[0].value * 0.29;
+  const targetYSpeed = document.getElementsByName('targetVerticalSpeed')[0].value * 0.19;
+  return {tankSpeed, targetOrbitSpeed, targetYSpeed};
+}
+
+
+function checkCam(camList) {
+  let camera;
+  camList.forEach( cam => {
+    if(document.getElementById(cam.name).checked)
+      camera = cam.cam;
+  });
+  return camera
+}
 
 main()
