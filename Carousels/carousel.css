@@ -18,8 +18,9 @@
     flex-shrink: 0;
     margin: 0 2vw;
 }
+#zero {}
 #one {
-    background-color: blue;
+    background-color: black;
 }
 #two {
     background-color: pink;
